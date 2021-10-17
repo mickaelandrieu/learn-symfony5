@@ -33,7 +33,7 @@ Informations de requêtes HTTP, base de données, cache, erreurs ...
 ### Activation de APCu
 
 * Installer l'extension PHP selon votre [système d'exploitation](http://pecl.php.net/package/APCu/5.1.21).
-
+* Mettre le fichier de l'extension dans le bon dossier qui contient les autres extensions
 * Dans le fichier `php.ini`, ajouter la ligne suivante :
 
 `extension=apcu`
