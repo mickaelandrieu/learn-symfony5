@@ -59,6 +59,8 @@ Ex :  symfony proxy:domain:attach sf
 
 Le projet sera alors disponible à l'adresse suivante après lancement du serveur web : [https://sf.wip](https://sf.wip).
 
+> N'oubliez pas de relancer la commande "symfony proxy:start" si vous l'avez arrêtée !
+
 ### Installation du package Encore
 
 * `cd sf-app`
