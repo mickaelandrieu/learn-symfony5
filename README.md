@@ -1,68 +1,39 @@
-# Live 1 : Pré-requis et installation
+# Live 2 : MakerBundle, création de base de données et débogagge
 
-## Pré-requis
+## Installation du MakerBundle
 
-* [PHP 8](https://www.colinodell.com/blog/202011/how-install-php-80)
-* [MySQL](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/)
-* [Composer](https://getcomposer.org/)
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [BeepKeeper Studio](https://www.beekeeperstudio.io/)
-* [Symfony CLI](https://symfony.com/download)
-* [npm et nodejs](https://nodejs.org/en/download/)
+* `composer require symfony/maker-bundle --dev`
 
-### Extensions PHP
+## Mise en place de la base de données
 
-Activez ces extensions dans le fichier php.ini :
+* `php bin/console doctrine:database:create`
 
-* `curl`
-* `intl`
-* `mbstring`
-* `mysqli`
-* `openssl`
-* `pdo_mysql`
-* `pdo_pgsql`
-* `pdo_sqlite`
-* `sodium`
-* `sqlite3`
-* `xsl`
+## Création de votre premier contrôleur
 
-## Création du projet
+* `php bin/console make:controller`
 
-### Téléchargement des ressources
+## Les outils pour déboguer son application
 
-La commande suivante va télécharger l'application Symfony et toutes les dépendances :
+### La gestion d'erreurs (Error Handler)
 
-* `symfony new <nom-app> --full`
+Il sera activé en mode `dev`. Pour cela, il faut mettre à jour la valeur de `APP_ENV` à `dev` dans le fichier `.env` (autres valeurs : `prod`, `test`).
 
-Ex: symfony new sf-app --full
+### Le Web Profiler
 
-### Activation du HTTPS
+Aussi activé en mode `dev`, va collecter de l'information pendant la construction de l'application.
 
-L'instruction suivante permet d'activer le HTTPS sur votre poste de développement :
+Informations de requêtes HTTP, base de données, cache, erreurs ...
 
-* `symfony server:ca:install`
+### Fonctions de déboggage
 
-### Configuration d'un nom de domaine (en mode dev)
+* `dump()`, `dd()`
 
-Selon votre système d'exploitation, configurez [le proxy](https://symfony.com/doc/current/setup/symfony_server.html#setting-up-the-local-proxy) :
+> Aussi disponible dans les templates, on y reviendra.
 
-* `symfony proxy:start` (ne pas fermer, ni stopper la commande)
-* `cd sf-app` (A l'intérieur du projet, dans le dossier racine)
-* `symfony proxy:domain:attach <domaine>`
+### Activation de APCu
 
-Ex :  symfony proxy:domain:attach sf
+* Installer l'extension PHP selon votre [système d'exploitation](http://pecl.php.net/package/APCu/5.1.21).
 
-### Démarrage du serveur web
+* Dans le fichier `php.ini`, ajouter la ligne suivante :
 
-* `cd sf-app`
-* `symfony serve`
-
-Le projet sera alors disponible à l'adresse suivante après lancement du serveur web : [https://sf.wip](https://sf.wip).
-
-> N'oubliez pas de relancer la commande "symfony proxy:start" si vous l'avez arrêtée !
-
-### Installation du package Encore
-
-* `cd sf-app`
-* `composer require symfony/webpack-encore-bundle`
-* `npm install`
+`extension=apcu`
