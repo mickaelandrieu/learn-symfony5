@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur votre site !{% endblock %}
+
+{% block body %}
+Ici vous trouverez une liste de recettes, un jour 😇
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p>Hello {{ app.user.firstname }} {{ app.user.lastname }} !</p>
+    <p>Voici l'accès à la partie privée : <a href="{{ path('beep') }}">Admin</a></p>
+{% endif %}
+
+{% endblock %}
