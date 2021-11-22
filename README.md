@@ -45,7 +45,3 @@ security:
 ## Création du formulaire de création de comptes
 
 * `php bin/console make:registration-form`
-
-## Mise à jour de la base de données
-
-* `php bin/console doctrine:migrations:migrate`
