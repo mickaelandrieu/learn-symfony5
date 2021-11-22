@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recipe{% endblock %}
+
+{% block body %}
+    <h1>Recipe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ recipe.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ recipe.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ recipe.content }}</td>
+            </tr>
+            <tr>
+                <th>Creation_date</th>
+                <td>{{ recipe.creationDate ? recipe.creationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                
+                <td><img src="{{ asset('uploads/recipes/' ~ recipe.image) }}" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('recipe_index') }}">back to list</a>
+
+    <a href="{{ path('recipe_edit', {'id': recipe.id}) }}">edit</a>
+
+    {{ include('recipe/_delete_form.html.twig') }}
+{% endblock %}
