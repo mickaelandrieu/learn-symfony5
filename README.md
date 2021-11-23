@@ -31,7 +31,7 @@ security:
                 enable_csrf: true
 
             logout:
-                path: app_logout
+                path: logout
                 target: home
 
     role_hierarchy:
