@@ -1,36 +1,71 @@
-# Live 5 : la gestion des recettes
+# Live 5 : Introduction à Twig et Bootstrap 5
 
-## Mise en place du CRUD
+## Mise en place de Bootstrap 5
 
-* `php bin/console make:crud`
+* `composer require symfony/webpack-encore-bundle`
+* `npm install bootstrap --save-dev`
+* `npm install @popperjs/core --save-dev`
+* `npm install sass-loader@^12.0.0 sass --save-dev`
+* `npm install`
 
-### Correction de la connection avec User
+Puis dans `assets/styles/app.scss` :
 
-```php
-<?php
-class User {
-    /* ... */
-    public function __toString()
-    {
-        return $this->firstname . ' ' . $this->lastname;
-    }
-}
->
+```css
+@import "~bootstrap/scss/bootstrap";
 ```
 
-## Gestion de [l'upload d'un fichier](https://symfony.com/doc/current/controller/upload_file.html)
+## Mise à jour de la configuration WebPack
 
+```javascript
+const Encore = require('@symfony/webpack-encore');
 
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
 
-### Activation de l'extension php_fileinfo
+Encore
+    .setOutputPath('public/build/')
+    .setPublicPath('/build')
+    .addEntry('app', './assets/app.js')
+    .splitEntryChunks()
+    .enableSingleRuntimeChunk()
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableVersioning(Encore.isProduction())
+    .configureBabel((config) => {
+        config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+    .configureBabelPresetEnv((config) => {
+        config.useBuiltIns = 'usage';
+        config.corejs = 3;
+    })
+    .enableSassLoader()
+;
 
-Dans le fichier php.ini, décommentez l'extension `fileinfo` et relancez symfony serve.
+module.exports = Encore.getWebpackConfig();
+```
 
-### Supprimer l'erreur "le fichier manifest.json n'existe pas" (temporaire)
+## Mise à jour du Form Theme de Symfony
+
+Dans le fichier ``config/packages/twig.yaml`` :
 
 ```yaml
-# config/packages/assets.yaml
-framework:
-    assets:
-        #json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_5_layout.html.twig']
 ```
+## Activer le chargement des assets
+
+Dans `templates/base.html.twig`, décommentez les fonctions `encore_entry_link_tags` et `encore_entry_script_tags`.
+
+## Démarrer le serveur front (Encore)
+
+* `npm run watch`
+* `npm run build` (pour les assets compilés en production)
+
+## Documentation
+
+* [https://symfony.com/doc/current/frontend/encore/simple-example.html](https://symfony.com/doc/current/frontend/encore/simple-example.html)
+* [https://symfony.com/doc/current/form/bootstrap5.html](https://symfony.com/doc/current/form/bootstrap5.html)
+* [https://getbootstrap.com/docs/5.1/getting-started/introduction/](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
