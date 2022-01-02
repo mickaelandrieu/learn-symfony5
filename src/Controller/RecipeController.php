@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/admin/recipe')]
 class RecipeController extends AbstractController
@@ -26,7 +27,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -35,7 +36,6 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $form = $this->manageUpload($form, $recipe, $slugger);
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recipe);
             $entityManager->flush();
 
@@ -57,7 +57,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'recipe_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Recipe $recipe, SluggerInterface $slugger): Response
+    public function edit(Request $request, Recipe $recipe, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
@@ -65,7 +65,7 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $form = $this->manageUpload($form, $recipe, $slugger);
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('recipe_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -77,10 +77,9 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'recipe_delete', methods: ['POST'])]
-    public function delete(Request $request, Recipe $recipe): Response
+    public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($recipe);
             $entityManager->flush();
         }
