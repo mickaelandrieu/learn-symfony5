@@ -1,4 +1,4 @@
-# Live 5 : Introduction à Twig et Bootstrap 5
+# Live 6 : Introduction à Twig et Bootstrap 5
 
 ## Mise en place de Bootstrap 5
 
