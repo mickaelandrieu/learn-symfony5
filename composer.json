@@ -88,7 +88,7 @@
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix tests"
         ],
-        "phpstan": "./vendor/bin/phpstan analyze src --level 3",
+        "phpstan": "./vendor/bin/phpstan analyze src",
         "check-quality": [
             "@cs-fix",
             "@phpstan"

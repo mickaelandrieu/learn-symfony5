@@ -1,2 +1,6 @@
+parameters:
+    # Définition du niveau de qualité
+    level: 3
+
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
