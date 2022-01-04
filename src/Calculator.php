@@ -5,12 +5,13 @@ namespace App;
 /**
  * This class is used to realize some basic calculations.
  * For training purposes only, use bc_math functions instead.
+ *
  * @author Mickaël Andrieu <mickael.andrieu@solvolabs.com>
  */
 class Calculator
 {
     /**
-     * @var float The result to display.
+     * @var float the result to display
      */
     private $result;
 
@@ -25,7 +26,7 @@ class Calculator
     }
 
     /**
-     * @param float $number A number.
+     * @param float $number a number
      */
     public function add($number)
     {
@@ -33,7 +34,7 @@ class Calculator
     }
 
     /**
-     * @param float $number A number.
+     * @param float $number a number
      */
     public function minus($number)
     {
@@ -41,7 +42,7 @@ class Calculator
     }
 
     /**
-     * @param float $number A number.
+     * @param float $number a number
      */
     public function multiply($number)
     {
@@ -49,7 +50,7 @@ class Calculator
     }
 
     /**
-     * @param float $number A number.
+     * @param float $number a number
      */
     public function divideBy($number)
     {
