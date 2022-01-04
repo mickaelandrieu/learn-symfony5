@@ -36,4 +36,4 @@ Done.
 
 ## (Bonus) Configurer un hook git
 
-En cours
+En cours + check quality

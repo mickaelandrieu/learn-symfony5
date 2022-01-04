@@ -89,6 +89,10 @@
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix tests"
         ],
         "phpstan": "./vendor/bin/phpstan analyze src --level 3",
+        "check-quality": [
+            "@cs-fix",
+            "@phpstan"
+        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

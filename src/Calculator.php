@@ -25,28 +25,27 @@ class Calculator
         $this->result = $initialValue;
     }
 
-    public function add(float $number) : void
+    public function add(float $number): void
     {
         $this->result = $this->result + $number;
     }
 
-
-    public function minus(float $number) : void
+    public function minus(float $number): void
     {
         $this->result = $this->result - $number;
     }
 
-    public function multiply(float $number) : void
+    public function multiply(float $number): void
     {
         $this->result = $this->result * $number;
     }
 
-    public function divideBy(float $number) : void
+    public function divideBy(float $number): void
     {
         $this->result = $this->result / $number;
     }
 
-    public function result() : string
+    public function result(): string
     {
         return (string) $this->result;
     }

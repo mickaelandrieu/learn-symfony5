@@ -98,13 +98,14 @@ class RecipeController extends AbstractController
             $newFilename = $safeFilename.'-'.uniqid().'.'.$recipeFile->guessExtension();
 
             try {
+                $toto = "'EEE";
                 $recipesDirectory = $this->getParameter('recipes_directory');
                 if (is_string($recipesDirectory)) {
                     $recipeFile->move(
                         $recipesDirectory,
                         $newFilename
                     );
-                }  
+                }
             } catch (FileException $e) {
                 $this->addFlash('error', '[Upload] : '.$e->getMessage());
             }
