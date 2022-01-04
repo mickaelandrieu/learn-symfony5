@@ -32,5 +32,8 @@ composer require phpstan/phpstan --dev
 
 ## (Bonus) Configurer Composer
 
+Done.
+
 ## (Bonus) Configurer un hook git
 
+En cours
