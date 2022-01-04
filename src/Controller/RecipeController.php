@@ -89,7 +89,7 @@ class RecipeController extends AbstractController
 
     private function manageUpload(FormInterface $form, Recipe $recipe, SluggerInterface $slugger): FormInterface
     {
-        /** @var UploadedFile $recipeFile */
+        /** @var UploadedFile|null $recipeFile */
         $recipeFile = $form->get('image_file')->getData();
         if ($recipeFile) {
             $originalFilename = pathinfo($recipeFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -98,10 +98,13 @@ class RecipeController extends AbstractController
             $newFilename = $safeFilename.'-'.uniqid().'.'.$recipeFile->guessExtension();
 
             try {
-                $recipeFile->move(
-                    $this->getParameter('recipes_directory'),
-                    $newFilename
-                );
+                $recipesDirectory = $this->getParameter('recipes_directory');
+                if (is_string($recipesDirectory)) {
+                    $recipeFile->move(
+                        $recipesDirectory,
+                        $newFilename
+                    );
+                }  
             } catch (FileException $e) {
                 $this->addFlash('error', '[Upload] : '.$e->getMessage());
             }

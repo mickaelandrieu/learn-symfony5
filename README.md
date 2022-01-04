@@ -24,6 +24,12 @@ tools/php-cs-fixer/vendor/bin/php-cs-fixer fix . --dry-run --stop-on-violation
 
 ## PHPStan
 
+### Installation
+
+```
+composer require phpstan/phpstan --dev
+```
+
 ## (Bonus) Configurer Composer
 
 ## (Bonus) Configurer un hook git

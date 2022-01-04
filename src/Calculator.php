@@ -25,45 +25,29 @@ class Calculator
         $this->result = $initialValue;
     }
 
-    /**
-     * @param float $number a number
-     */
-    public function add($number)
+    public function add(float $number) : void
     {
         $this->result = $this->result + $number;
     }
 
-    /**
-     * @param float $number a number
-     */
-    public function minus($number)
+
+    public function minus(float $number) : void
     {
         $this->result = $this->result - $number;
     }
 
-    /**
-     * @param float $number a number
-     */
-    public function multiply($number)
+    public function multiply(float $number) : void
     {
         $this->result = $this->result * $number;
     }
 
-    /**
-     * @param float $number a number
-     */
-    public function divideBy($number)
+    public function divideBy(float $number) : void
     {
         $this->result = $this->result / $number;
     }
 
-    /**
-     * If the object is returned, the result should be displayed.
-     *
-     * @return string
-     */
-    public function result()
+    public function result() : string
     {
-        return $this->result;
+        return (string) $this->result;
     }
 }
